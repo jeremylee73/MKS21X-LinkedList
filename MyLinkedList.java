@@ -1,4 +1,4 @@
-public class Node{
+class Node{
   private int data;
   private Node prev, next;
 
@@ -28,8 +28,8 @@ public class Node{
   }
 }
 
-public class MyLinkedList {
-  private Node start, end;
+class MyLinkedList {
+  private Node first, last;
   private int size;
 
   public MyLinkedList(){
@@ -40,5 +40,16 @@ public class MyLinkedList {
     return size;
   }
 
-
+  public boolean add(int n){
+    if (last == null){
+      last = new Node(n, last, null);
+      first = last;
+    } else {
+      Node newNode = new Node(n, last.getPrev(), null);
+      last.setNext(newNode);
+      last = newNode;
+    }
+    size++;
+    return true;
+  }
 }
