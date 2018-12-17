@@ -52,4 +52,15 @@ class MyLinkedList {
     size++;
     return true;
   }
+
+  public String toString(){
+    String ans = "[" + first.getData() + ", ";
+    Node current = first.getNext();
+    for (int i=1; i<size-1; i++){
+      ans += current.getData() + ", ";
+      current = current.getNext();
+    }
+    ans += current.getData() + "]";
+    return ans;
+  }
 }
