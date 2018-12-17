@@ -63,16 +63,21 @@ class MyLinkedList {
     ans += current.getData() + "]";
     return ans;
   }
-  public int get(int index){
+  public Node getNode(int index){
     Node current = first;
     for (int i=0; i<size; i++){
       if (i==index){
-        return current.getData();
+        return current;
       }
       current = current.getNext();
     }
-    return -1;
+    return first; // placeholder
   }
 
-  
+  public int getNodeData(int index){
+    return getNode(index).getData();
+  }
+  public void setNodeData(int index, int value){
+    getNode(index).setData(value);
+  }
 }
