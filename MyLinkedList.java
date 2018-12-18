@@ -63,14 +63,16 @@ class MyLinkedList {
   }
 
   public String toString(){
+    if(size == 0) {
+      return "[]";
+    }
     String ans = "[";
-    Node current = first.getNext();
-    for (int i=0; i<size-1; i++){
-      ans += current.getData() + ", ";
+    Node current = first;
+    while(current != null){
+      ans += current.getData()+", ";
       current = current.getNext();
     }
-    ans += current.getData() + "]";
-    return ans;
+    return ans.substring(0,ans.length()-2)+"]";
   }
 
   public Node getNode(int index){
