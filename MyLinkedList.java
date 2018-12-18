@@ -57,9 +57,17 @@ class MyLinkedList {
     if (index < 0 || index > size){
       throw new IndexOutOfBoundsException();
     }
-    Node newNode = new Node(value, getNode(index-1), getNode(index));
-    getNode(index-1).setNext(newNode);
-    getNode(index).setPrev(newNode);
+    if (index == 0){
+      Node newNode = new Node(value, null, getNode(index));
+      getNode(index).setPrev(newNode);
+    } else if (index == size){
+      Node newNode = new Node(value, getNode(index-1), null);
+      getNode(index-1).setNext(newNode);
+    } else{
+      Node newNode = new Node(value, getNode(index-1), getNode(index));
+      getNode(index-1).setNext(newNode);
+      getNode(index).setPrev(newNode);
+    }
   }
 
   public String toString(){
