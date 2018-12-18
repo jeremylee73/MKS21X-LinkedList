@@ -87,8 +87,12 @@ class MyLinkedList {
   }
 
   public int get(int index){
+    if (index < 0 || index >= size){
+      throw new IndexOutOfBoundsException();
+    }
     return getNode(index).getData();
   }
+
   public int set(int index, int value){
     int oldData = get(index);
     getNode(index).setData(value);
