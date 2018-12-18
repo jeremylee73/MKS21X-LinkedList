@@ -116,6 +116,7 @@ class MyLinkedList {
       if (current.getData() == value){
         return i;
       }
+      current = current.getNext();
     }
     return -1;
   }
