@@ -33,7 +33,7 @@ class MyLinkedList {
   private int size;
 
   public MyLinkedList(){
-
+    size = 0;
   }
 
   public int size(){
@@ -63,15 +63,16 @@ class MyLinkedList {
   }
 
   public String toString(){
-    String ans = "[" + first.getData() + ", ";
+    String ans = "[";
     Node current = first.getNext();
-    for (int i=1; i<size-1; i++){
+    for (int i=0; i<size-1; i++){
       ans += current.getData() + ", ";
       current = current.getNext();
     }
     ans += current.getData() + "]";
     return ans;
   }
+
   public Node getNode(int index){
     Node current = first;
     for (int i=0; i<size; i++){
@@ -133,4 +134,16 @@ class MyLinkedList {
    size--;
    return ans;
  }
+
+ public void extend(MyLinkedList other){
+     if(other.first != null){
+       last.setNext(other.first);
+       other.first.setPrev(last);
+       last = other.last;
+       size = size() + other.size();
+       other.size = 0;
+       other.first = null;
+       other.last = null;
+     }
+  }
 }
