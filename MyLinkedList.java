@@ -151,6 +151,30 @@ class MyLinkedList {
    return ans;
  }
 
+ public boolean remove(Integer value){
+   if (!contains(value)){
+     return false;
+   }
+    Node current = first;
+    while(current != null && !(current.equals(value))){
+      current = current.getNext();
+    }
+    if(current==null){
+      return false;
+    }else if(current==first){
+      first = current.getNext();
+      first.setPrev(null);
+    }else if(current==last){
+      last = current.getPrev();
+      last.setNext(null);
+    } else{
+      getNode(indexOf(current.getData())-1).setNext(getNode(indexOf(current.getData())+1));
+      getNode(indexOf(current.getData())+1).setPrev(getNode(indexOf(current.getData())-1));
+    }
+    size--;
+    return true;
+  }
+
  public void extend(MyLinkedList other){
      if(other.first != null){
        last.setNext(other.first);
