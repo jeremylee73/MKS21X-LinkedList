@@ -53,6 +53,15 @@ class MyLinkedList {
     return true;
   }
 
+  public void add(int index, int value){
+    if (index < 0 || index > size){
+      throw new IndexOutOfBoundsException();
+    }
+    Node newNode = new Node(value, getNode(index-1), getNode(index));
+    getNode(index-1).setNext(newNode);
+    getNode(index).setPrev(newNode);
+  }
+
   public String toString(){
     String ans = "[" + first.getData() + ", ";
     Node current = first.getNext();
@@ -74,10 +83,54 @@ class MyLinkedList {
     return first; // placeholder
   }
 
-  public int getNodeData(int index){
+  public int get(int index){
     return getNode(index).getData();
   }
-  public void setNodeData(int index, int value){
+  public int set(int index, int value){
+    int oldData = get(index);
     getNode(index).setData(value);
+    return oldData;
   }
+
+  public boolean contains(int value){
+    Node current = first;
+    for (int i=0; i<size; i++){
+      if (current.getData() == value){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public int indexOf(int value){
+    Node current = first;
+    for (int i=0; i<size; i++){
+      if (current.getData() == value){
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  public int remove(int index) {
+   if (index < 0 || index >= size()) {
+     throw new IndexOutOfBoundsException();
+   }
+   int ans = get(index);
+   if (index == 0) {
+     first = getNode(index+1);
+     return ans;
+   }
+   if (getNode(index).getNext() == null) {
+     getNode(index-1).setNext(last);
+     last = getNode(index-1);
+     last.setNext(null);
+     size--;
+     return ans;
+   }
+   getNode(index-1).setNext(getNode(index+1));
+   getNode(index).setPrev(getNode(index-1));
+   size--;
+   return ans;
+ }
 }
