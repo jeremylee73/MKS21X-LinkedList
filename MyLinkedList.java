@@ -176,14 +176,23 @@ class MyLinkedList {
   }
 
  public void extend(MyLinkedList other){
-     if(other.first != null){
-       last.setNext(other.first);
-       other.first.setPrev(last);
-       last = other.last;
-       size = size() + other.size();
-       other.size = 0;
-       other.first = null;
-       other.last = null;
+   if (size == 0 && other.size != 0){
+     Node current = other.first;
+     for (int i=0; i<other.size; i++){
+       add(current.getData());
+       current = current.getNext();
      }
+     other.size = 0;
+     other.first = null;
+     other.last = null;
+   } else if(other.first != null){
+     last.setNext(other.first);
+     other.first.setPrev(last);
+     last = other.last;
+     size = size + other.size;
+     other.size = 0;
+     other.first = null;
+     other.last = null;
+   }
   }
 }
